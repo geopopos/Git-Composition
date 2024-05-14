@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://d1qvdvtqna2i6"]
+
+[ext_resource type="Texture2D" uid="uid://cakq31p2ih1b3" path="res://icon.svg" id="1_43mkh"]
+[ext_resource type="PackedScene" uid="uid://bxf85dfnaxe6i" path="res://scenes/top_down_movement.tscn" id="2_jpjxp"]
+[ext_resource type="PackedScene" uid="uid://x7wyav0h75qy" path="res://scenes/top_down_movement_velocity_input.tscn" id="3_qbvxa"]
+[ext_resource type="Resource" uid="uid://dsknjlk15x7ka" path="res://Modules/player_movement_stats.tres" id="4_vdm6s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_slnnb"]
+size = Vector2(124, 126)
+
+[node name="Player" type="CharacterBody2D" groups=["players"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_slnnb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_43mkh")
+
+[node name="TopDownMovement" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("2_jpjxp")]
+actor = NodePath("..")
+
+[node name="TopDownMovementVelocityInput" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("3_qbvxa")]
+actor = NodePath("..")
+top_down_movement_stats = ExtResource("4_vdm6s")

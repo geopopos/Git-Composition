@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://c7i5srqi3ni71"]
+
+[ext_resource type="Texture2D" uid="uid://cakq31p2ih1b3" path="res://icon.svg" id="1_qdd3n"]
+[ext_resource type="PackedScene" uid="uid://bxf85dfnaxe6i" path="res://scenes/top_down_movement.tscn" id="2_s00g3"]
+[ext_resource type="PackedScene" uid="uid://6jgmguay1vx1" path="res://scenes/top_down_velocity_ai.tscn" id="3_b2741"]
+[ext_resource type="Resource" uid="uid://belnpnpvep6lv" path="res://Modules/enemy_movement_stats.tres" id="4_0lfbu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6c37t"]
+size = Vector2(126, 126)
+
+[node name="Enemy" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_6c37t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1, 0, 0.196078, 1)
+texture = ExtResource("1_qdd3n")
+
+[node name="TopDownMovement" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("2_s00g3")]
+actor = NodePath("..")
+
+[node name="TopDownVelocityAI" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("3_b2741")]
+actor = NodePath("..")
+top_down_movement_stats = ExtResource("4_0lfbu")
+search_radius_scale = 5.0
